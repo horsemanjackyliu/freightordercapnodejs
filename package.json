@@ -1,0 +1,59 @@
+{
+  "name": "freightorderattachments",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^8",
+    "express": "^4",
+    "@sap/xb-msg-amqp-v100": "^0"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@cap-js/cds-types": "^0.6"
+  },
+  "scripts": {
+    "start": "cds-serve"
+  },
+  "cds": {
+    "requires": {
+      "CE_FREIGHTORDER_0001": {
+        "kind": "odata",
+        "model": "srv/external/CE_FREIGHTORDER_0001",
+        "[production]": {
+          "credentials": {
+            "destination": "O5PDN",
+            "path": "/sap/opu/odata4/sap/api_freightorder/srvd_a2x/sap/freightorder/0001"
+          }
+        },
+        "[development]": {
+          "credentials": {
+            "url": "https://my300018-api.saps4hanacloud.cn/sap/opu/odata4/sap/api_freightorder/srvd_a2x/sap/freightorder/0001",
+            "authentication": "BasicAuthentication",
+            "username": "communication-user",
+            "password": "communication-password"
+          }
+        }
+      },
+      "[production]": {
+        "messaging": {
+          "kind": "enterprise-messaging",
+          "publishPrefix": "$namespace/",
+          "subscribePrefix": "$namespace/",
+          "queue": { "name": "$namespace/fo" }
+        }
+      },
+      "[hybrid]": {
+        "messaging": {
+          "kind": "enterprise-messaging-shared",
+          "publishPrefix": "$namespace/",
+          "subscribePrefix": "$namespace/",
+          "queue": { "name": "$namespace/fo" }
+
+        }
+      }
+    }
+  }
+}
