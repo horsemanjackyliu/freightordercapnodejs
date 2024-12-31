@@ -4,12 +4,20 @@ using { sap.capire.freightorder.attachments.db as db } from '../db/schema';
 
 
 
+
 service freightorder {
 
-    entity FreightOrder as projection on db.FreightOrder ;
+    entity SrvFreightOrder as projection on db.DBFreightOrder ;
 
-    entity FreightOrderItem as projection on db.FreightOrderItem;
+    entity SrvFreightOrderItem as projection on db.DBFreightOrderItem;
 
     
 
 }
+
+
+
+
+// annotate freightorder with @(requires: 'admin') ;
+
+

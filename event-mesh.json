@@ -1,7 +1,7 @@
 {
   "emname": "freightorderattachments-emname",
   "version": "1.1.0",
-  "namespace": "default/freightorderattachments/1",
+  "namespace": "com/fo/attach",
   "options": {
     "management": true,
     "messagingrest": true,
@@ -13,7 +13,7 @@
         "${namespace}/*"
       ],
       "subscribeFilter": [
-        "*"
+        "${namespace}/*"
       ]
     },
     "queueRules": {

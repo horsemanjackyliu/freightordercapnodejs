@@ -23,3 +23,7 @@ File or Folder | Purpose
 ## Learn More
 
 Learn more at https://cap.cloud.sap/docs/get-started/.
+
+
+cds bind --to freightorderattachments-messaging:fos4o5p
+cds watch --profile hybrid
