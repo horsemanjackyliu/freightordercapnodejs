@@ -1,5 +1,4 @@
 namespace sap.capire.freightorder.attachments.db;
-using { Attachments } from '@cap-js/sdm';
 
 entity DBFreightOrder {
   key TransportationOrderUUID : String(36) ;
@@ -104,24 +103,6 @@ entity DBFreightOrderItem  {
   TranspOrdItemGrossVolumeUnit : String(3) ;
   TranspOrdItemNetWeight : Decimal(31, 14) ;
   TranspOrdItemNetWeightUnit : String(3) ;
-  attachments: Composition of many Attachments ;
 }
-
-
-// extend DBFreightOrderItem with {
-//   Attachments: Composition of many Attachments ;
-// };
-
-
-
-// entity FreightOrderItemAttachments {
-
-//  @Common.Label : 'Transportation Order UUID'
-//   key TransportationOrderUUID : UUID ;
-//   key AttachmentNumb: Integer ;
-//   CmisObjId : String(36);  
-
-
-// }
 
 
