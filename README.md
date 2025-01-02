@@ -1,3 +1,9 @@
+---
+noteId: "48e633c0c8fa11efb1376198d99b5f98"
+tags: []
+
+---
+
 # Getting Started
 
 Welcome to your new project.

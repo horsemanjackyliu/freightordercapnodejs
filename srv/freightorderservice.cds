@@ -7,9 +7,8 @@ using { sap.capire.freightorder.attachments.db as db } from '../db/schema';
 
 service freightorder {
 
-    @readonly
 
-    entity SrvFreightOrder as projection on db.DBFreightOrder ;
+    entity SrvFreightOrder @readonly as projection on db.DBFreightOrder ;
 
  @Capabilities : { UpdateRestrictions : {
      $Type : 'Capabilities.UpdateRestrictionsType',
@@ -30,6 +29,14 @@ service freightorder {
     
 
 }
+
+
+
+annotate freightorder.SrvFreightOrderItem with @Capabilities : { 
+    InsertRestrictions.Insertable: false,
+    UpdateRestrictions.Updatable: true,
+    DeleteRestrictions.Deletable: false
+ } ;
 
 
 
