@@ -38,6 +38,9 @@ annotate freightorder.SrvFreightOrderItem with @Capabilities : {
     DeleteRestrictions.Deletable: false
  } ;
 
+ annotate freightorder.SrvFreightOrderItem with @odata.draft.enabled @fiori.draft.enabled;
+ 
+
 
 
 // annotate freightorder with @(requires: 'admin') ;
