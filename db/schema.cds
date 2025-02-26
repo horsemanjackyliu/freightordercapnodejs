@@ -1,4 +1,4 @@
-namespace sap.capire.freightorder.attachments.db;
+ namespace sap.freightorder.db;
 
 entity DBFreightOrder {
   key TransportationOrderUUID : String(36) ;
