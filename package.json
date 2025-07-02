@@ -1,0 +1,108 @@
+{
+    "name": "freightorderattachments",
+    "version": "1.0.0",
+    "description": "A simple CAP project.",
+    "repository": "<Add your repository here>",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@cap-js/hana": "^1",
+        "@cap-js/sdm": "^1.2.2",
+        "@sap-cloud-sdk/connectivity": "^3.21.0",
+        "@sap-cloud-sdk/http-client": "^3.21.0",
+        "@sap-cloud-sdk/resilience": "^3.21.0",
+        "@sap/cds": "^8",
+        "@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
+        "@sap/xb-msg-amqp-v100": "^0",
+        "@sap/xssec": "^4",
+        "@sapui5/ts-types": "^1.92.2",
+        "eslint": "^7.32.0",
+        "express": "^4",
+        "rimraf": "^6.0.1"
+    },
+    "devDependencies": {
+        "@cap-js/cds-types": "^0.6",
+        "@cap-js/sqlite": "^1",
+        "@sap/cds-dk": "^8",
+        "@sap/ux-specification": "UI5-1.131"
+    },
+    "scripts": {
+        "start": "cds-serve",
+        "undeploy": "cf undeploy freightorderattachments --delete-services --delete-service-keys --delete-service-brokers",
+        "build": "rimraf gen resources mta_archives && mbt build --mtar archive",
+        "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+        "watch-freightordermgt": "cds watch --open freightordermgt/webapp/index.html?sap-ui-xx-viewCache=false"
+    },
+    "cds": {
+        "log": {
+            "levels": {
+                "sql": "TRACE",
+                "cds": "DEBUG",
+                "web": "DEBUG",
+                "db": "TRACE"
+            }
+        },
+        "requires": {
+            "sdm": {
+                "settings": {
+                    "repositoryId": "0791a77c-6969-43a2-b18e-607e55235f7a"
+                }
+            },
+            "CE_FREIGHTORDER_0001": {
+                "kind": "odata",
+                "model": "srv/external/CE_FREIGHTORDER_0001",
+                "[production]": {
+                    "credentials": {
+                        "destination": "O5PDN",
+                        "path": "/sap/opu/odata4/sap/api_freightorder/srvd_a2x/sap/freightorder/0001"
+                    }
+                },
+                "[hybrid]": {
+                    "credentials": {
+                        "url": "https://myxxxxxx-api.saps4hanacloud.cn/sap/opu/odata4/sap/api_freightorder/srvd_a2x/sap/freightorder/0001",
+                        "authentication": "BasicAuthentication",
+                        "username": "<username>",
+                        "password": "<password>"
+                    }
+                }
+            },
+            "[production]": {
+                "messaging": {
+                    "kind": "enterprise-messaging",
+                    "publishPrefix": "$namespace/",
+                    "subscribePrefix": "$namespace/",
+                    "queue": {
+                        "name": "$namespace/fo1"
+                    }
+                },
+                "auth": "xsuaa",
+                "db": "hana"
+            },
+            "[hybrid]": {
+                "sdm": {
+                    "settings": {
+                        "repositoryId": "0791a77c-6969-43a2-b18e-607e55235f7a"
+                    }
+                },
+                "messaging": {
+                    "kind": "enterprise-messaging-shared",
+                    "publishPrefix": "$namespace/",
+                    "subscribePrefix": "$namespace/"
+                },
+                "db": {
+                    "kind": "sqlite",
+                    "credentials": {
+                        "url": "db.sqlite"
+                    },
+                    "schema_evolution": "auto"
+                }
+            },
+            "destinations": true,
+            "html5-repo": true,
+            "workzone": true
+        }
+    },
+    "sapux": [
+        "app/freightordermgt"
+    ]
+}
